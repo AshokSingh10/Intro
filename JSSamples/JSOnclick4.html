@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>JS Onclick</title>
+  </head>
+  <body>
+    <header>
+        <h1>JS On click test</h1>
+    </header>
+         <h2>Invoke REST</h2>
+		 <h3 id="demo">POST</h3>
+        
+		  <script type="text/javascript">
+			
+				
+				restPost("http://localhost:8080/CXFSOAPRESTServer/addrbooksvc/accounts/json/create");
+			
+			// Issue an HTTP POST request to create an account
+			// When the response arrives, pass it to the callback function for status
+			function restPost(url, callbackPost) {
+				var request = new XMLHttpRequest(); // Create new request
+				var postdata = "{\"Account\":{\"accountaddress\":\"10 trumbull street\",\"accountid\":\"dc=TestAcc,dc=accounts,dc=addressbook,dc=jboss,dc=com\",\"accountname\":\"TestAcc\",\"accountnotes\":\"Test \",\"isroot\":false}}"
+				request.open("POST", url, true); // Specify URL to post
+				request.setRequestHeader("authTokenParam", "token");
+				request.setRequestHeader("Content-Type", "application/json");
+				request.setRequestHeader("Content-Length", postdata.length);
+				request.setRequestHeader("Connnection", "close");
+				request.onreadystatechange = function() { // Define event listener
+				// If the request is compete and was successful
+				if (request.readyState === 4 && request.status === 200) {
+				    // Log response
+					callbackPost(request);
+				}
+			}
+				request.send(postdata); // Send the request now
+			}
+			
+			function callbackPost(request) {
+				console.log(request.responseText);
+			}
+			
+		</script>
+      </body>
+</html>

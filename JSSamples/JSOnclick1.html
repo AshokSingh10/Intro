@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>JS Onclick</title>
+  </head>
+  <body>
+    <header>
+        <h1>JS On click test</h1>
+    </header>
+         <h2>Links</h2>
+          <li><a title="Yahoo" href="http://www.yahoo.com" id="1" onClick="onLinkClick(this)">Click on Yahoo</a> </li>
+          <li><a title="CNN" href="http://www.cnn.com" id="2" onClick="onLinkClick(this)">Click on CNN</a> </li>
+		  <script type="text/javascript">
+			function onLinkClick(e)
+			{
+				console.log("link id : " + e.id + " link title: " + e.title + " link href: " + e.href);
+			}
+		</script>
+      </body>
+</html>

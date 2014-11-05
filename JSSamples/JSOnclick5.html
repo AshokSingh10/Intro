@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>JS Onclick</title>
+  </head>
+  <body>
+    <header>
+        <h1>JS On click test</h1>
+    </header>
+         <h2>Invoke REST</h2>
+		 <h3 id="demo">PUT</h3>
+        
+		  <script type="text/javascript">
+			
+				
+				restPut("http://localhost:8080/CXFSOAPRESTServer/addrbooksvc/accounts/json/update", callbackPut);
+			
+			// Issue an HTTP PUT request to create an account
+			// When the response arrives, pass it to the callback function for status
+			function restPut(url, callback) {
+				var request = new XMLHttpRequest(); // Create new request
+				var putdata = "{\"Account\":{\"accountaddress\":\"11 trumbull street\",\"accountid\":\"dc=TestAcc,dc=accounts,dc=addressbook,dc=jboss,dc=com\",\"accountname\":\"TestAcc\",\"accountnotes\":\"Test \",\"isroot\":false}}"
+				request.open("PUT", url, true); // Specify URL to put
+				request.setRequestHeader("authTokenParam", "token");
+				request.setRequestHeader("Content-Type", "application/json");
+				request.setRequestHeader("Content-Length", putdata.length);
+				request.setRequestHeader("Connnection", "close");
+				request.onreadystatechange = function() { // Define event listener
+				// If the request is compete and was successful
+				if (request.readyState === 4 && request.status === 200) {
+				    // Log response
+					callback(request);
+				}
+			}
+				request.send(putdata); // Send the request now
+			}
+			
+			function callbackPut(request) {
+				console.log(request.responseText);
+			}
+			
+		</script>
+      </body>
+</html>

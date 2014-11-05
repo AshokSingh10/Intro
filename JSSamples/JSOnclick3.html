@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>JS Onclick</title>
+  </head>
+  <body>
+    <header>
+        <h1>JS On click test</h1>
+    </header>
+         <h2>Invoke REST</h2>
+		 <h3 id="demo">Account Id</h3>
+        
+		  <script type="text/javascript">
+			
+				
+				restReq("http://localhost:8080/CXFSOAPRESTServer/addrbooksvc/accounts/json/id/dc=PeelSoft,dc=accounts,dc=addressbook,dc=jboss,dc=com", callbackId);
+				restReq("http://localhost:8080/CXFSOAPRESTServer/addrbooksvc/accounts/json/list", callbackAccArray);
+			
+			// Issue an HTTP GET request for the contents of the specified URL.
+			// When the response arrives, pass it to the callback function as a
+			// parsed XML Document object, a JSON-parsed object, or a string.
+			function restReq(url, callback) {
+				var request = new XMLHttpRequest(); // Create new request
+				request.open("GET", url); // Specify URL to fetch
+				request.setRequestHeader("authTokenParam", "token");
+				request.onreadystatechange = function() { // Define event listener
+				// If the request is compete and was successful
+				if (request.readyState === 4 && request.status === 200) {
+				// Get the type of the response
+					var type = request.getResponseHeader("Content-Type");
+					// Check type so we don't get HTML documents in the future
+					if (type.indexOf("xml") !== -1 && request.responseXML)
+						callback(request.responseXML); // Document response
+					else if (type === "application/json")
+					callback(JSON.parse(request.responseText)); // JSON response
+					else
+					callback(request.responseText); // String response
+				}
+			}
+				request.send(null); // Send the request now
+			}
+			function callbackId(e) {
+				console.log("Account address: " + e.Account.accountaddress);
+			}
+			function callbackAccArray(e) {
+				console.log("Account id element 1: " + e.Account[0].accountid);
+				document.getElementById("demo").innerHTML = e.Account[0].accountid;
+			}
+			
+		</script>
+      </body>
+</html>
