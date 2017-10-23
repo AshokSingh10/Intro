@@ -6,3 +6,6 @@ Steps:
 Step1
 Name: launch ssh
 Command: ssh
+Step1
+Name: launch ssh
+Command: ssh
