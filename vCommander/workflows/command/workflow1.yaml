@@ -3,3 +3,6 @@ Workflow Module:
 Input: 
 param1: String
 Steps:
+Step1
+Name: launch ssh
+Command: ssh
