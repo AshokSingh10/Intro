@@ -1,4 +1,4 @@
--- Test workflow
+-- Test command workflow
 Workflow Module: 
 Input: 
 param1: String
@@ -9,9 +9,6 @@ Command: ssh
 Step1
 Name: launch ssh
 Command: ssh
-Step1
-Name: launch ssh
-Command: ssh
-Step1
-Name: launch ssh
-Command: ssh
+Step2:
+Name: send email
+— JGit Test 7
